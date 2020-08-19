@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter,
+  Route,
+  Switch
+} from 'react-router-dom';
 import Nav from './Nav';
 import Gallery from './Gallery';
 import Search from './Search';
@@ -63,15 +68,18 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <Search />
-        <Nav />
-        {
-          (this.state.loading)
-            ? <p>Loading...</p>
-            : <Gallery photos={this.state.cats} />
-        }
-      </div>
+      <BrowserRouter>
+        <div className="container">
+          <Search />
+          <Nav />
+          <Switch>
+            <Route path="/cats" render={() => <Gallery photos={this.state.cats} />} />
+            <Route path="/dogs" render={() => <Gallery photos={this.state.dogs} />} />
+            <Route path="/computers" render={() => <Gallery photos={this.state.computers} />} />
+          </Switch>
+          
+        </div>
+      </BrowserRouter>
     );
   }
 }
