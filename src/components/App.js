@@ -12,14 +12,18 @@ class App extends Component {
 
   state = {
     loading: true,
-    photos: null
+    cats: null,
+    dogs: null,
+    computers: null
   }
 
   componentDidMount() {
-    this.getPhotos('cats')
-    .then(photos => {
+    Promise.all([ this.getPhotos('cat'), this.getPhotos('dog'), this.getPhotos('computer') ])
+    .then(([cats, dogs, computers]) => {
       this.setState({
-        photos: photos,
+        cats,
+        dogs,
+        computers,
         loading: false
       });
     });
@@ -45,7 +49,7 @@ class App extends Component {
       let photo_id = photo.id;
       let secret = photo.secret;
 
-      let photoURL = `https://farm${farm_id}.staticflickr.com/${server_id}/${photo_id}_${secret}.jpg`;
+      let photoURL = `https://farm${farm_id}.staticflickr.com/${server_id}/${photo_id}_${secret}_m.jpg`;
 
       return { url: photoURL,
                id: photo_id
@@ -61,7 +65,7 @@ class App extends Component {
         {
           (this.state.loading)
             ? <p>Loading...</p>
-            : <Gallery photos={this.state.photos} />
+            : <Gallery photos={this.state.cats} />
         }
       </div>
     );
