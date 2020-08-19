@@ -11,11 +11,15 @@ import Search from './Search';
 class App extends Component {
 
   state = {
-    loading: true
+    loading: true,
+    photos: null
   }
 
   componentDidMount() {
-    
+    this.setState({
+      photos: this.getPhotos('cats'),
+      loading: false
+    });
   }
 
   getPhotos = (searchTerm) => {
@@ -35,7 +39,7 @@ class App extends Component {
       return parsedPhotos;
   }
 
-  parsePhotoURLs(data) {
+  parsePhotoURLs = (data) => {
     // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     return data.photos.photo.map(photo => {
       let farm_id = photo.farm;
@@ -57,10 +61,10 @@ class App extends Component {
         <Search />
         <Nav />
         {
-            (this.state.loading)
-              ? <p>Loading...</p>
-              : <Gallery photos={this.state.photos} />
-          }
+          (this.state.loading)
+            ? <p>Loading...</p>
+            : <Gallery photos={this.state.photos} />
+        }
       </div>
     );
   }
