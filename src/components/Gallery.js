@@ -2,11 +2,13 @@ import React from 'react';
 import Photo from './Photo';
 import NotFound from './NotFound';
 
-const Gallery = (props) => (
+const Gallery = ({ photos }) => (
   <div className="photo-container">
     <h2>Results</h2>
     <ul>
-      <Photo />
+      { photos.map(photo => (
+        <Photo photoURL={photo.url} key={photo.id} />
+      )) }
     </ul>
   </div>
 );
