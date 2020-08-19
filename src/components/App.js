@@ -67,17 +67,27 @@ class App extends Component {
   }
 
   render() {
+    const mainContent = () => (
+        <>
+          <Nav />
+          <Switch>
+            <Route path="/cats" render={(props) => (<Gallery {...props} photos={this.state.cats} />)} />
+            <Route path="/dogs" render={(props) => (<Gallery {...props} photos={this.state.dogs} />)} />
+            <Route path="/computers" render={(props) => (<Gallery {...props} photos={this.state.computers} />)} />
+          </Switch>
+        </>
+    );
+
+
     return (
       <BrowserRouter>
         <div className="container">
           <Search />
-          <Nav />
-          <Switch>
-            <Route path="/cats" render={() => <Gallery photos={this.state.cats} />} />
-            <Route path="/dogs" render={() => <Gallery photos={this.state.dogs} />} />
-            <Route path="/computers" render={() => <Gallery photos={this.state.computers} />} />
-          </Switch>
-          
+          {
+            (this.state.loading)
+              ? <p>Loading...</p>
+              : mainContent()
+          }
         </div>
       </BrowserRouter>
     );
