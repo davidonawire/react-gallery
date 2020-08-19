@@ -18,7 +18,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    Promise.all([ this.getPhotos('cat'), this.getPhotos('dog'), this.getPhotos('computer') ])
+    Promise.all([ 
+      this.getPhotos('cat'),
+      this.getPhotos('dog'),
+      this.getPhotos('computer')
+    ])
     .then(([cats, dogs, computers]) => {
       this.setState({
         cats,
@@ -31,7 +35,7 @@ class App extends Component {
 
   getPhotos = (searchTerm) => {
     let apiKey = this.props.api;
-    let fetchURL = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTerm}&safe_search=1&content_type=1&media=photos&per_page=&format=json&nojsoncallback=1`;
+    let fetchURL = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTerm}&safe_search=1&content_type=1&media=photos&per_page=24&format=json&nojsoncallback=1`;
 
     return fetch(fetchURL)
       .then(response => response.json())
