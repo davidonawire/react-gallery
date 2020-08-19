@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Nav from './Nav';
 import Gallery from './Gallery';
+import Search from './Search';
 
 // Search
 // Nav
 // PhotoContainer
 // Photo
 
-function App() {
-  return (
-    <div className="container">
-      <Nav />
-      <Gallery />
-    </div>
-  );
+class App extends Component {
+
+  
+
+  render() {
+    return (
+      <div className="container">
+        <Search />
+        <Nav />
+        <Gallery />
+      </div>
+    );
+  }
 }
 
 export default App;
