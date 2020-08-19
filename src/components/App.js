@@ -16,27 +16,25 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      photos: this.getPhotos('cats'),
-      loading: false
+    this.getPhotos('cats')
+    .then(photos => {
+      this.setState({
+        photos: photos,
+        loading: false
+      });
     });
   }
 
   getPhotos = (searchTerm) => {
-    let parsedPhotos;
     let apiKey = this.props.api;
     let fetchURL = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTerm}&safe_search=1&content_type=1&media=photos&per_page=&format=json&nojsoncallback=1`;
 
-    fetch(fetchURL)
+    return fetch(fetchURL)
       .then(response => response.json())
-      .then(data => {
-        parsedPhotos = this.parsePhotoURLs(data);
-      })
+      .then(data =>  this.parsePhotoURLs(data))
       .catch(error => {
         console.error('There was an error when fetching photos: ', error);
       })
-
-      return parsedPhotos;
   }
 
   parsePhotoURLs = (data) => {
