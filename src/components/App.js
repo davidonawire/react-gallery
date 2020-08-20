@@ -4,9 +4,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import getPhotos from '../getPhotos';
 import Nav from './Nav';
-import Gallery from './Gallery';
 import Search from './Search';
 import SearchResults from './SearchResults';
 
