@@ -8,6 +8,7 @@ import getPhotos from '../getPhotos';
 import Nav from './Nav';
 import Gallery from './Gallery';
 import Search from './Search';
+import SearchResults from './SearchResults';
 
 // Search
 // Nav
@@ -47,6 +48,7 @@ class App extends Component {
             <Route path="/cats" render={(props) => (<Gallery {...props} photos={this.state.cats} title="Cats" />)} />
             <Route path="/dogs" render={(props) => (<Gallery {...props} photos={this.state.dogs} title="Dogs" />)} />
             <Route path="/birds" render={(props) => (<Gallery {...props} photos={this.state.birds} title="Birds" />)} />
+            <Route path="/search/:searchterm" render={(props) => (<SearchResults {...props} />)} />
           </Switch>
         </>
     );
