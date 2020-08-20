@@ -3,16 +3,26 @@ import getPhotos from '../getPhotos';
 import Gallery from './Gallery';
 
 class SearchResults extends Component {
-
-  state = {
-    loading: true,
-    photos: null
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      photos: null
+    }
   }
 
-  searchTerm = this.props.match.params.searchterm;
-
   componentDidMount() {
-    getPhotos(this.searchTerm)
+    this.fetchData(this.props.searchterm);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.searchterm !== this.props.searchterm) {
+      this.fetchData(this.props.searchterm);
+    }
+  }
+
+  fetchData(searchTerm) {
+    getPhotos(searchTerm)
     .then((photos) => {
       this.setState({
         photos,
@@ -25,7 +35,7 @@ class SearchResults extends Component {
       return (
         (this.state.loading)
         ? <p>Loading...</p>
-        : <Gallery photos={this.state.photos} title={this.searchTerm} />
+        : <Gallery photos={this.state.photos} title={this.props.searchterm} />
       )
   }
 }
