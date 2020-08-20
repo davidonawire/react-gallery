@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   BrowserRouter,
   Route,
@@ -8,38 +8,7 @@ import Nav from './Nav';
 import Search from './Search';
 import SearchResults from './SearchResults';
 
-// Search
-// Nav
-// PhotoContainer
-// Photo
-
-class App extends Component {
-
-  // state = {
-  //   loading: true,
-  //   cats: null,
-  //   dogs: null,
-  //   birds: null
-  // }
-
-  // componentDidMount() {
-  //   Promise.all([ 
-  //     getPhotos('cat'),
-  //     getPhotos('dog'),
-  //     getPhotos('bird')
-  //   ])
-  //   .then(([cats, dogs, birds]) => {
-  //     this.setState({
-  //       cats,
-  //       dogs,
-  //       birds,
-  //       loading: false
-  //     });
-  //   });
-  // }
-
-  render() {
-    return (
+const App = () => (
       <BrowserRouter>
         <div className="container">
           <Search />
@@ -52,8 +21,6 @@ class App extends Component {
           </Switch>
         </div>
       </BrowserRouter>
-    );
-  }
-}
+);
 
 export default App;
