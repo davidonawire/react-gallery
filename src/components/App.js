@@ -19,20 +19,20 @@ class App extends Component {
     loading: true,
     cats: null,
     dogs: null,
-    computers: null
+    birds: null
   }
 
   componentDidMount() {
     Promise.all([ 
       this.getPhotos('cat'),
       this.getPhotos('dog'),
-      this.getPhotos('computer')
+      this.getPhotos('bird')
     ])
-    .then(([cats, dogs, computers]) => {
+    .then(([cats, dogs, birds]) => {
       this.setState({
         cats,
         dogs,
-        computers,
+        birds,
         loading: false
       });
     });
@@ -40,7 +40,7 @@ class App extends Component {
 
   getPhotos = (searchTerm) => {
     let apiKey = this.props.api;
-    let fetchURL = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTerm}&safe_search=1&content_type=1&media=photos&per_page=24&format=json&nojsoncallback=1`;
+    let fetchURL = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${searchTerm}&sort=relevance&safe_search=1&content_type=1&media=photos&per_page=24&format=json&nojsoncallback=1`;
 
     return fetch(fetchURL)
       .then(response => response.json())
@@ -71,9 +71,9 @@ class App extends Component {
         <>
           <Nav />
           <Switch>
-            <Route path="/cats" render={(props) => (<Gallery {...props} photos={this.state.cats} />)} />
-            <Route path="/dogs" render={(props) => (<Gallery {...props} photos={this.state.dogs} />)} />
-            <Route path="/computers" render={(props) => (<Gallery {...props} photos={this.state.computers} />)} />
+            <Route path="/cats" render={(props) => (<Gallery {...props} photos={this.state.cats} title="Cats" />)} />
+            <Route path="/dogs" render={(props) => (<Gallery {...props} photos={this.state.dogs} title="Dogs" />)} />
+            <Route path="/birds" render={(props) => (<Gallery {...props} photos={this.state.birds} title="Birds" />)} />
           </Switch>
         </>
     );
