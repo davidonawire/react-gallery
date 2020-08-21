@@ -7,6 +7,7 @@ import {
 import Nav from './Nav';
 import Search from './Search';
 import SearchResults from './SearchResults';
+import NotFound404 from './NotFound404';
 
 const App = () => (
       <BrowserRouter>
@@ -18,6 +19,7 @@ const App = () => (
             <Route path="/dogs" render={() => (<SearchResults searchterm="dogs" />)} />
             <Route path="/birds" render={() => (<SearchResults searchterm="birds" />)} />
             <Route path="/search/:searchterm" render={(props) => (<SearchResults searchterm={props.match.params.searchterm} />)} />
+            <Route component={NotFound404} />
           </Switch>
         </div>
       </BrowserRouter>
