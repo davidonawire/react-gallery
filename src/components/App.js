@@ -2,7 +2,8 @@ import React from 'react';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
 import Nav from './Nav';
 import Search from './Search';
@@ -15,6 +16,7 @@ const App = () => (
           <Search />
           <Nav />
           <Switch>
+            <Route exact path="/" render={() => (<Redirect to="/cats" />)} />
             <Route path="/cats" render={() => (<SearchResults searchterm="cats" />)} />
             <Route path="/dogs" render={() => (<SearchResults searchterm="dogs" />)} />
             <Route path="/birds" render={() => (<SearchResults searchterm="birds" />)} />
