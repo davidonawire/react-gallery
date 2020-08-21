@@ -10,6 +10,15 @@ class Search extends Component {
     this.props.history.push(path);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      const path = this.props.location.pathname;
+      if (path.indexOf('/search/') !== 0) {
+        this.search.value = '';
+      }
+    }
+  }
+
   render() {
     return (
       <form className="search-form" onSubmit={this.handleSubmit}>
