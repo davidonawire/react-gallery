@@ -32,6 +32,8 @@ class SearchResults extends Component {
   getPhotos = (searchTerm) => {
     let fetchURL = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${searchTerm}&sort=relevance&safe_search=1&content_type=1&media=photos&per_page=24&format=json&nojsoncallback=1`;
   
+    this.setState({ loading: true });
+
     fetch(fetchURL)
       .then(response => response.json())
       .then(data => this.parsePhotoURLs(data))
