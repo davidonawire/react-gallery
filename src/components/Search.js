@@ -6,7 +6,7 @@ class Search extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     let searchTerm = this.search.value;
-    let path = `search/${searchTerm}`;
+    let path = `/search/${searchTerm}`;
     this.props.history.push(path);
   }
 
