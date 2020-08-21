@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Gallery from './Gallery';
+import NotFound from './NotFound';
 import apiKey from '../config';
 
 class SearchResults extends Component {
@@ -55,11 +56,13 @@ class SearchResults extends Component {
   }
 
   render() {
-      return (
-        (this.state.loading)
-        ? <p>Loading...</p>
-        : <Gallery photos={this.state.photos} title={this.props.searchterm} />
-      )
+      if (this.state.loading) {
+        return <p>Loading...</p>
+      } else if (this.state.photos.length === 0) {
+        return <NotFound />
+      } else {
+        return <Gallery photos={this.state.photos} title={this.props.searchterm} />
+      }
   }
 }
 
