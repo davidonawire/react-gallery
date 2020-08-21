@@ -3,6 +3,12 @@ import Gallery from './Gallery';
 import NotFound from './NotFound';
 import apiKey from '../config';
 
+/**
+ *  SearchResults acts as a container for a Gallery of images.
+ *  The component handles the fetching and parsing of image data
+ *  based on a provided search term, whether from a nav link
+ *  or from the Search form.
+ */
 class SearchResults extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +22,7 @@ class SearchResults extends Component {
     this.getPhotos(this.props.searchterm);
   }
 
+  // Ensure we load a new set of photos when we send the component a new search term
   componentDidUpdate(prevProps) {
     if (prevProps.searchterm !== this.props.searchterm) {
       this.getPhotos(this.props.searchterm);
@@ -39,8 +46,8 @@ class SearchResults extends Component {
       })
   }
 
+  // Parse the Flickr JSON into image URLs and return an array of { url, id } objects
   parsePhotoURLs = (data) => {
-    // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     return data.photos.photo.map(photo => {
       let farm_id = photo.farm;
       let server_id = photo.server;

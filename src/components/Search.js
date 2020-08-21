@@ -10,6 +10,7 @@ class Search extends Component {
     this.props.history.push(path);
   }
 
+  // Clear the search field when a nav link is clicked
   componentDidUpdate(prevProps) {
     if (prevProps.location.pathname !== this.props.location.pathname) {
       const path = this.props.location.pathname;
